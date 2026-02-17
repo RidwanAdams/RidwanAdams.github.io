@@ -1,3 +1,28 @@
+// Mobile Detection and Fixes
+(function() {
+    // Check if mobile/touch device
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+    const isMobile = window.innerWidth <= 768;
+    
+    // Add mobile class to body
+    if (isMobile) {
+        document.body.classList.add("mobile-device");
+    }
+    if (isTouchDevice) {
+        document.body.classList.add("touch-device");
+    }
+    
+    // Fix for iOS viewport height issues
+    function setViewportHeight() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty("--vh", vh + "px");
+    }
+    
+    setViewportHeight();
+    window.addEventListener("resize", setViewportHeight, { passive: true });
+    window.addEventListener("orientationchange", setViewportHeight, { passive: true });
+})();
+
 // RPG Portfolio JavaScript
 document.addEventListener('DOMContentLoaded', function() {
     // ========== CUSTOM CURSOR ==========

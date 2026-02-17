@@ -3819,3 +3819,144 @@ body {
         font-size: 10px;
     }
 }
+
+/* ========== CRITICAL MOBILE FIXES ========== */
+
+/* Ensure proper viewport behavior */
+@viewport {
+    width: device-width;
+    initial-scale: 1;
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    body {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Additional Mobile Menu Fixes */
+@media (max-width: 768px) {
+    /* Ensure navbar container stays on one line */
+    .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+    }
+    
+    /* Logo should not wrap */
+    .navbar .logo {
+        font-size: 1.25rem;
+        white-space: nowrap;
+    }
+    
+    /* Ensure hamburger is visible */
+    .menu-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+        z-index: 10001;
+    }
+    
+    /* Ensure nav-links overlay covers everything except navbar */
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        bottom: auto;
+        max-height: calc(100vh - 70px);
+        background: var(--bg-color);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        z-index: 9998;
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 0.5rem;
+        border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .nav-links.active {
+        display: flex !important;
+    }
+    
+    /* Large touch targets for nav links */
+    .nav-links a {
+        display: block;
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+        text-align: center;
+        min-height: 44px;
+        line-height: 44px;
+        border-radius: 8px;
+    }
+    
+    /* Hide theme toggle on mobile nav to save space */
+    .nav-links .theme-toggle {
+        margin: 1rem auto 0;
+        width: 50px;
+        height: 50px;
+    }
+    
+    /* Prevent horizontal scroll */
+    html, body {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
+    /* Ensure all sections fit screen width */
+    section {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+    
+    /* Game overlay adjustments */
+    .game-overlay {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    
+    /* Larger touch targets for game */
+    #game-canvas {
+        touch-action: pan-y;
+    }
+    
+    /* Responsive typography */
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.25rem; }
+    p { font-size: 1rem; }
+    
+    /* Container padding adjustment */
+    .container {
+        padding: 0 15px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+    .navbar .logo {
+        font-size: 1.1rem;
+    }
+    
+    .menu-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .nav-links {
+        top: 65px;
+    }
+}
