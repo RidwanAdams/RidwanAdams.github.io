@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburger Menu Color Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        [data-theme="dark"] body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        [data-theme="light"] body {
+            background-color: #ffffff;
+            color: #1a1a2e;
+        }
+        
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.05);
+        }
+        
+        [data-theme="dark"] .test-container {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .hamburger-test {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 2px solid;
+            border-radius: 8px;
+        }
+        
+        [data-theme="dark"] .hamburger-test {
+            border-color: #334155;
+        }
+        
+        [data-theme="light"] .hamburger-test {
+            border-color: #e9ecef;
+        }
+        
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: inherit;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .menu-toggle:hover {
+            background-color: rgba(0,0,0,0.1);
+        }
+        
+        [data-theme="dark"] .menu-toggle:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .menu-toggle i {
+            color: inherit;
+        }
+        
+        .theme-toggle {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #4361ee, #7209b7);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="test-container">
+        <h1>Hamburger Menu Color Fix Test</h1>
+        
+        <button class="theme-toggle" onclick="toggleTheme()">
+            Toggle Dark/Light Mode
+        </button>
+        
+        <h2>Test Results:</h2>
+        
+        <div class="hamburger-test">
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div>
+                <h3>Hamburger Menu Icon</h3>
+                <p>This icon should change color with the theme:</p>
+                <ul>
+                    <li><strong>Light mode:</strong> Dark color (#1a1a2e)</li>
+                    <li><strong>Dark mode:</strong> Light color (#e2e8f0)</li>
+                </ul>
+                <p><strong>Status:</strong> <span id="status">Testing...</span></p>
+            </div>
+        </div>
+        
+        <h2>CSS Rules Applied:</h2>
+        <pre><code>
+.menu-toggle {
+    color: inherit; /* Inherits from parent */
+}
+
+.menu-toggle i {
+    color: inherit; /* Ensures icon inherits color */
+}
+
+[data-theme="dark"] .menu-toggle {
+    color: var(--text-color); /* Dark mode text color */
+}
+
+[data-theme="dark"] .menu-toggle i {
+    color: inherit; /* Dark mode icon color */
+}
+        </code></pre>
+        
+        <p>The same fix has been applied to the main portfolio's CSS.</p>
+    </div>
+
+    <script>
+        // Get current theme
+        const currentTheme = localStorage.getItem('theme') || 
+                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        // Apply theme on load
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        
+        // Test icon color
+        function testIconColor() {
+            const icon = document.querySelector('.menu-toggle i');
+            const computedColor = window.getComputedStyle(icon).color;
+            const theme = document.documentElement.getAttribute('data-theme');
+            
+            const expectedColor = theme === 'dark' ? 'rgb(226, 232, 240)' : 'rgb(26, 26, 46)';
+            const isCorrect = computedColor === expectedColor;
+            
+            document.getElementById('status').textContent = 
+                isCorrect ? '✅ Correct color!' : '❌ Incorrect color';
+            document.getElementById('status').style.color = isCorrect ? 'green' : 'red';
+            
+            console.log(`Theme: ${theme}, Icon color: ${computedColor}, Expected: ${expectedColor}`);
+        }
+        
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            // Apply new theme
+            document.documentElement.setAttribute('data-theme', newTheme);
+            
+            // Save to localStorage
+            localStorage.setItem('theme', newTheme);
+            
+            // Update button text
+            document.querySelector('.theme-toggle').textContent = 
+                `Switch to ${currentTheme === 'dark' ? 'Dark' : 'Light'} Mode`;
+            
+            // Test icon color
+            setTimeout(testIconColor, 100);
+        }
+        
+        // Set initial button text
+        document.querySelector('.theme-toggle').textContent = 
+            `Switch to ${currentTheme === 'dark' ? 'Light' : 'Dark'} Mode`;
+        
+        // Test on load
+        setTimeout(testIconColor, 100);
+    </script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</body>
+</html>

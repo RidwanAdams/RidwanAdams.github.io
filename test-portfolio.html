@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Portfolio Test Page</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .success { color: green; font-weight: bold; }
+        .error { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Portfolio Test</h1>
+    
+    <div id="results">
+        <h2>Checking portfolio files...</h2>
+        <p id="html-check">Checking index.html...</p>
+        <p id="css-check">Checking style.css...</p>
+        <p id="js-check">Checking script.js...</p>
+    </div>
+    
+    <div id="open-links">
+        <h2>Open Portfolio:</h2>
+        <button onclick="window.open('index.html', '_blank')">Open Main Portfolio</button>
+        <button onclick="window.open('test-portfolio.html', '_blank')">Open This Test Page</button>
+    </div>
+    
+    <script>
+        // Check if files exist by trying to load them
+        async function checkFile(url, elementId) {
+            try {
+                const response = await fetch(url);
+                if (response.ok) {
+                    document.getElementById(elementId).innerHTML = 
+                        `<span class="success">✅ ${url} - Found (${response.status})</span>`;
+                    return true;
+                } else {
+                    document.getElementById(elementId).innerHTML = 
+                        `<span class="error">❌ ${url} - Error (${response.status})</span>`;
+                    return false;
+                }
+            } catch (error) {
+                document.getElementById(elementId).innerHTML = 
+                    `<span class="error">❌ ${url} - ${error.message}</span>`;
+                return false;
+            }
+        }
+        
+        // Run checks
+        async function runChecks() {
+            await checkFile('index.html', 'html-check');
+            await checkFile('style.css', 'css-check');
+            await checkFile('script.js', 'js-check');
+        }
+        
+        runChecks();
+    </script>
+</body>
+</html>

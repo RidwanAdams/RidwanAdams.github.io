@@ -1,0 +1,3821 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Cyberpunk Color Palette */
+    --primary-color: #00f3ff;
+    --primary-dark: #00b8c4;
+    --secondary-color: #9d00ff;
+    --accent-color: #ff00ff;
+    --success-color: #00ff9d;
+    
+    /* Neutral Colors */
+    --text-color: #ffffff;
+    --text-light: #b0b0ff;
+    --bg-color: #0a0a0f;
+    --bg-light: #151520;
+    --bg-dark: #05050a;
+    --border-color: #2a2a3a;
+    
+    /* Effects */
+    --shadow-sm: 0 2px 4px rgba(0, 243, 255, 0.1);
+    --shadow: 0 4px 12px rgba(0, 243, 255, 0.15);
+    --shadow-lg: 0 10px 25px rgba(0, 243, 255, 0.2);
+    --shadow-xl: 0 20px 40px rgba(0, 243, 255, 0.25);
+    --radius: 8px;
+    --radius-lg: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    --gradient-dark: linear-gradient(135deg, var(--bg-dark), #1a1a2e);
+    --gradient-accent: linear-gradient(135deg, var(--accent-color), var(--success-color));
+    
+    /* Cyberpunk Glow Effects */
+    --glow-primary: 0 0 10px rgba(0, 243, 255, 0.7), 0 0 20px rgba(0, 243, 255, 0.5), 0 0 30px rgba(0, 243, 255, 0.3);
+    --glow-secondary: 0 0 10px rgba(157, 0, 255, 0.7), 0 0 20px rgba(157, 0, 255, 0.5), 0 0 30px rgba(157, 0, 255, 0.3);
+    --glow-accent: 0 0 10px rgba(255, 0, 255, 0.7), 0 0 20px rgba(255, 0, 255, 0.5), 0 0 30px rgba(255, 0, 255, 0.3);
+    
+    /* Scanline Texture */
+    --scanline: repeating-linear-gradient(0deg, rgba(0, 243, 255, 0.05) 0px, rgba(0, 243, 255, 0.05) 1px, transparent 1px, transparent 2px);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    color: var(--text-color);
+    line-height: 1.7;
+    background-color: var(--bg-color);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Cyberpunk Background Grid */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.3;
+    animation: gridMove 20s linear infinite;
+}
+
+/* Custom Cursor */
+.cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, border-color 0.2s;
+    box-shadow: var(--glow-primary);
+}
+
+.cursor.hover {
+    width: 40px;
+    height: 40px;
+    border-color: var(--accent-color);
+    box-shadow: var(--glow-accent);
+}
+
+.cursor.click {
+    width: 30px;
+    height: 30px;
+    border-color: var(--success-color);
+    box-shadow: var(--glow-accent);
+}
+
+.cursor::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cursor.hover::before {
+    background: var(--accent-color);
+}
+
+@keyframes gridMove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 50px 50px;
+    }
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+/* Selection Color */
+::selection {
+    background-color: rgba(67, 97, 238, 0.2);
+    color: var(--text-color);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--bg-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+    font-family: 'Orbitron', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: 3.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 2.75rem;
+    color: var(--text-color);
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+    box-shadow: var(--glow-primary);
+}
+
+h3 {
+    font-size: 1.75rem;
+    color: var(--text-color);
+}
+
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.75rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    color: var(--text-color);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.section-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    box-shadow: var(--glow-primary);
+}
+
+p {
+    font-size: 1.125rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Navigation */
+.navbar {
+    background-color: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-sm);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    padding: 1.25rem 0;
+    transition: var(--transition);
+    border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+}
+
+.navbar.scrolled {
+    padding: 0.75rem 0;
+    box-shadow: var(--shadow);
+    background-color: rgba(10, 10, 15, 0.98);
+    border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo::before {
+    content: '</>';
+    font-family: monospace;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: var(--transition);
+    border-radius: 1px;
+    box-shadow: var(--glow-primary);
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: var(--gradient-primary);
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: var(--transition);
+    box-shadow: var(--glow-primary);
+    margin-left: 1rem;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-secondary);
+    animation: neonPulse 0.5s ease-in-out;
+}
+
+@keyframes neonPulse {
+    0%, 100% {
+        box-shadow: var(--glow-primary);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 243, 255, 0.8), 0 0 40px rgba(0, 243, 255, 0.6), 0 0 60px rgba(0, 243, 255, 0.4);
+    }
+}
+
+.theme-toggle i {
+    position: absolute;
+    font-size: 1.25rem;
+    color: white;
+    transition: var(--transition);
+}
+
+.theme-toggle .fa-sun {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.theme-toggle .fa-moon {
+    opacity: 1;
+    transform: rotate(0);
+}
+
+/* Dark mode styles for toggle */
+[data-theme="dark"] .theme-toggle .fa-sun {
+    opacity: 1;
+    transform: rotate(0);
+}
+
+[data-theme="dark"] .theme-toggle .fa-moon {
+    opacity: 0;
+    transform: rotate(-90deg);
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.menu-toggle:hover {
+    background-color: var(--bg-light);
+}
+
+/* Ensure Font Awesome icons inside menu-toggle use the correct color */
+.menu-toggle i {
+    color: inherit;
+}
+
+/* Hero Section */
+.hero {
+    padding: 8rem 0 6rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(67, 97, 238, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(114, 9, 183, 0.1) 0%, transparent 50%);
+    z-index: 0;
+}
+
+.hero .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: var(--gradient-primary);
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+}
+
+.badge-text {
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.hero-title {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+}
+
+.hero-subtitle {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    line-height: 1.7;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 500;
+    margin-top: 0.5rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.hero-social {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: 50%;
+    color: var(--text-color);
+    font-size: 1.25rem;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.social-link:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    color: var(--primary-color);
+}
+
+/* Hero Image Styles */
+.hero-image {
+    position: relative;
+}
+
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 120px;
+    height: 120px;
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 80px;
+    height: 80px;
+    top: 60%;
+    right: 15%;
+    background: var(--gradient-accent);
+    animation-delay: 2s;
+}
+
+.shape-3 {
+    width: 60px;
+    height: 60px;
+    bottom: 20%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+.code-terminal {
+    background: var(--bg-dark);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    z-index: 1;
+}
+
+.terminal-header {
+    background: #1e1e1e;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #333;
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.terminal-title {
+    color: #888;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.terminal-content {
+    padding: 2rem;
+}
+
+.terminal-content pre {
+    margin: 0;
+    overflow-x: auto;
+}
+
+.terminal-content code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #e6e6e6;
+}
+
+.language-javascript .keyword { color: #569cd6; }
+.language-javascript .string { color: #ce9178; }
+.language-javascript .number { color: #b5cea8; }
+.language-javascript .function { color: #dcdcaa; }
+.language-javascript .comment { color: #6a9955; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gradient-primary);
+    z-index: -1;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.btn:hover::before {
+    opacity: 1;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+}
+
+.btn-primary::before {
+    background: linear-gradient(135deg, var(--primary-dark), var(--secondary-color));
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.1);
+}
+
+.btn-secondary:hover {
+    background: var(--gradient-primary);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(67, 97, 238, 0.3);
+}
+
+.btn i {
+    font-size: 1.1rem;
+}
+
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-placeholder {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 8rem;
+}
+
+/* Projects Section */
+.projects {
+    padding: 6rem 0;
+    background-color: var(--bg-light);
+    position: relative;
+}
+
+.projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+}
+
+.project-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-xl);
+}
+
+.project-card:hover::before {
+    transform: scaleX(1);
+}
+
+.project-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(67, 97, 238, 0.1);
+    border-radius: 50%;
+}
+
+.project-title {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.project-description {
+    color: var(--text-light);
+    margin-bottom: 1.75rem;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.tag {
+    background: rgba(67, 97, 238, 0.1);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(67, 97, 238, 0.2);
+    transition: var(--transition);
+}
+
+.tag:hover {
+    background: rgba(67, 97, 238, 0.15);
+    transform: translateY(-1px);
+}
+
+.project-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(67, 97, 238, 0.1);
+    border-radius: 50px;
+    transition: var(--transition);
+    border: 1px solid rgba(67, 97, 238, 0.2);
+}
+
+.project-link:hover {
+    background: rgba(67, 97, 238, 0.15);
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.15);
+}
+
+.project-link i {
+    transition: transform 0.3s ease;
+}
+
+.project-link:hover i {
+    transform: translateX(3px);
+}
+
+.project-link:hover {
+    text-decoration: underline;
+}
+
+/* Skills Section */
+.skills {
+    padding: 5rem 0;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.skill-category {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.category-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.skill-list {
+    list-style: none;
+}
+
+.skill-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.skill-list li:last-child {
+    border-bottom: none;
+}
+
+/* Contact Section */
+.contact {
+    padding: 5rem 0;
+    background-color: var(--bg-light);
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-info p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: var(--text-light);
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact-link:hover {
+    color: var(--primary-color);
+}
+
+.contact-link i {
+    font-size: 1.25rem;
+    width: 24px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Footer */
+.footer {
+    padding: 2rem 0;
+    text-align: center;
+    color: var(--text-light);
+    border-top: 1px solid var(--border-color);
+}
+
+.footer p {
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--bg-color);
+        padding: 1rem;
+        box-shadow: var(--shadow-lg);
+        border-radius: 0 0 var(--radius) var(--radius);
+        z-index: 1000;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .image-placeholder {
+        width: 200px;
+        height: 200px;
+        font-size: 5rem;
+        margin: 0 auto;
+    }
+}
+
+/* ========== DARK MODE STYLES ========== */
+[data-theme="dark"] {
+    /* Cyberpunk Dark Mode - Enhanced */
+    --text-color: #ffffff;
+    --text-light: #b0b0ff;
+    --bg-color: #05050a;
+    --bg-light: #151520;
+    --bg-dark: #000000;
+    --border-color: #2a2a3a;
+    
+    /* Neon Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 243, 255, 0.2);
+    --shadow: 0 4px 12px rgba(0, 243, 255, 0.3);
+    --shadow-lg: 0 10px 25px rgba(0, 243, 255, 0.4);
+    --shadow-xl: 0 20px 40px rgba(0, 243, 255, 0.5);
+}
+
+/* Dark mode body */
+[data-theme="dark"] body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Dark mode navbar */
+[data-theme="dark"] .navbar {
+    background-color: rgba(15, 23, 42, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .navbar.scrolled {
+    background-color: rgba(15, 23, 42, 0.98);
+}
+
+[data-theme="dark"] .logo {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .nav-links a {
+    color: var(--text-color);
+}
+
+/* Dark mode mobile menu */
+[data-theme="dark"] .nav-links {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .menu-toggle {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .menu-toggle:hover {
+    background-color: var(--bg-light);
+}
+
+/* Ensure Font Awesome icons inside menu-toggle use correct color in dark mode */
+[data-theme="dark"] .menu-toggle i {
+    color: inherit;
+}
+
+/* Dark mode hero section */
+[data-theme="dark"] .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+}
+
+[data-theme="dark"] .hero::before {
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(67, 97, 238, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(114, 9, 183, 0.15) 0%, transparent 50%);
+}
+
+[data-theme="dark"] .hero-subtitle {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .hero-description {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .hero-stats {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .stat-label {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .social-link {
+    background: var(--bg-light);
+    color: var(--text-color);
+    box-shadow: var(--shadow-sm);
+}
+
+[data-theme="dark"] .social-link:hover {
+    color: var(--primary-color);
+    box-shadow: var(--shadow);
+}
+
+/* Dark mode projects section */
+[data-theme="dark"] .projects {
+    background-color: var(--bg-light);
+}
+
+[data-theme="dark"] .project-card {
+    background: var(--bg-color);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .project-title {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .project-description {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .tag {
+    background: rgba(67, 97, 238, 0.2);
+    color: #93c5fd;
+    border: 1px solid rgba(67, 97, 238, 0.3);
+}
+
+[data-theme="dark"] .tag:hover {
+    background: rgba(67, 97, 238, 0.25);
+}
+
+[data-theme="dark"] .project-link {
+    background: rgba(67, 97, 238, 0.2);
+    color: #93c5fd;
+    border: 1px solid rgba(67, 97, 238, 0.3);
+}
+
+[data-theme="dark"] .project-link:hover {
+    background: rgba(67, 97, 238, 0.25);
+}
+
+/* Dark mode skills section */
+[data-theme="dark"] .skill-category {
+    background-color: var(--bg-color);
+}
+
+[data-theme="dark"] .skill-list li {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Dark mode contact section */
+[data-theme="dark"] .contact {
+    background-color: var(--bg-light);
+}
+
+[data-theme="dark"] .contact-info p {
+    color: var(--text-light);
+}
+
+[data-theme="dark"] .contact-link {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .contact-form input,
+[data-theme="dark"] .contact-form textarea {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .contact-form input:focus,
+[data-theme="dark"] .contact-form textarea:focus {
+    border-color: var(--primary-color);
+}
+
+/* Dark mode footer */
+[data-theme="dark"] .footer {
+    color: var(--text-light);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Dark mode buttons */
+[data-theme="dark"] .btn-secondary {
+    background: var(--bg-color);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+/* Dark mode code terminal (already dark, just adjustments) */
+[data-theme="dark"] .code-terminal {
+    background: #1a1a2e;
+}
+
+[data-theme="dark"] .terminal-header {
+    background: #0d1117;
+}
+
+[data-theme="dark"] .terminal-title {
+    color: #a0a0a0;
+}
+
+/* Dark mode section titles */
+[data-theme="dark"] .section-title {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] h2 {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] h3 {
+    color: var(--text-color);
+}
+
+/* Dark mode selection */
+[data-theme="dark"] ::selection {
+    background-color: rgba(67, 97, 238, 0.3);
+    color: var(--text-color);
+}
+
+/* Smooth theme transition */
+body {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ========== RPG PORTFOLIO STYLES ========== */
+
+/* RPG Hero Section */
+.rpg-hero {
+    padding: 8rem 0 6rem;
+    background: linear-gradient(135deg, #0a0a2a 0%, #1a1a4a 50%, #2a2a6a 100%);
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.rpg-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(114, 9, 183, 0.3) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(67, 97, 238, 0.3) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(247, 37, 133, 0.2) 0%, transparent 60%);
+    z-index: 0;
+    animation: pulse 8s ease-in-out infinite alternate;
+}
+
+.rpg-hero .container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.rpg-title-section {
+    margin-bottom: 4rem;
+}
+
+.rpg-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #7209b7, #4361ee);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    margin-bottom: 1.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(114, 9, 183, 0.4);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.rpg-badge-text {
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.rpg-title {
+    font-size: 4.5rem;
+    margin-bottom: 1rem;
+    color: white;
+    text-shadow: 0 0 20px rgba(67, 97, 238, 0.5);
+    font-family: 'Cinzel', serif;
+}
+
+.rpg-highlight {
+    background: linear-gradient(135deg, #f72585, #4cc9f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+.rpg-subtitle {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    line-height: 1.6;
+}
+
+/* RPG Stats Display */
+.rpg-stats-display {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin: 3rem auto;
+    max-width: 800px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.rpg-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.rpg-stat:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.rpg-stat-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+.rpg-stat-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.rpg-stat-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+}
+
+.rpg-stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    margin-top: 0.25rem;
+}
+
+/* Character Classes Grid */
+.character-classes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 4rem auto;
+    max-width: 1200px;
+}
+
+.character-card {
+    background: rgba(21, 21, 32, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    border: 2px solid rgba(0, 243, 255, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+.character-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.character-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--primary-color);
+    box-shadow: var(--glow-primary),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.character-card:hover::before {
+    transform: translateX(100%);
+}
+
+.character-card[data-class="paladin"] {
+    border-color: rgba(67, 97, 238, 0.4);
+}
+
+.character-card[data-class="ranger"] {
+    border-color: rgba(247, 37, 133, 0.4);
+}
+
+.character-card[data-class="wizard"] {
+    border-color: rgba(76, 201, 240, 0.4);
+}
+
+.character-card.selected {
+    background: rgba(255, 255, 255, 0.15);
+    border-width: 3px;
+    box-shadow: 
+        0 0 40px rgba(114, 9, 183, 0.5),
+        inset 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.character-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.character-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+.character-name {
+    font-size: 1.75rem;
+    color: white;
+    flex: 1;
+    text-align: left;
+    font-family: 'Cinzel', serif;
+}
+
+.character-level {
+    background: linear-gradient(135deg, #f72585, #4cc9f0);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.character-stats {
+    margin-bottom: 1.5rem;
+}
+
+.stat-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    width: 120px;
+    text-align: left;
+    font-weight: 500;
+}
+
+.stat-progress {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.stat-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4361ee, #7209b7);
+    border-radius: 4px;
+    position: relative;
+    transition: width 1s ease-in-out;
+}
+
+.stat-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.stat-value {
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    width: 40px;
+    text-align: right;
+}
+
+.character-description {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+/* Character Selection Buttons */
+.btn-select-character {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    border-radius: var(--radius);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+}
+
+.btn-select-character::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-select-character:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--glow-primary);
+    animation: neonFlicker 0.3s ease-in-out;
+}
+
+@keyframes neonFlicker {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+.btn-select-character:hover::before {
+    opacity: 1;
+}
+
+.btn-select-character:active {
+    transform: translateY(-1px);
+}
+
+.btn-text {
+    flex: 1;
+    text-align: center;
+}
+
+.btn-icon {
+    font-size: 1.25rem;
+}
+
+/* Game Start Section */
+.game-start-section {
+    margin-top: 4rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.selected-character-display {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.selected-character-display h3 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 1rem;
+    font-family: 'Cinzel', serif;
+}
+
+.selected-character-display p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.selected-class-name {
+    color: #4cc9f0;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+}
+
+.btn-start-adventure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.25rem 3rem;
+    background: linear-gradient(135deg, #f72585, #4cc9f0);
+    border: none;
+    border-radius: var(--radius);
+    color: white;
+    font-weight: 800;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-start-adventure::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #4cc9f0, #f72585);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-start-adventure:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 20px 40px rgba(247, 37, 133, 0.4),
+        0 0 30px rgba(76, 201, 240, 0.4);
+}
+
+.btn-start-adventure:hover::before {
+    opacity: 1;
+}
+
+.btn-start-adventure:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* RPG Animations */
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 20px rgba(114, 9, 183, 0.4);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(114, 9, 183, 0.6), 0 0 40px rgba(67, 97, 238, 0.4);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scroll Animations */
+.rpg-hero,
+.rpg-quests,
+.rpg-skill-tree,
+.rpg-contact-guild {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.rpg-hero.visible,
+.rpg-quests.visible,
+.rpg-skill-tree.visible,
+.rpg-contact-guild.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* RPG Responsive Design */
+@media (max-width: 768px) {
+    /* Disable custom cursor and simplify animations on mobile */
+    .cursor {
+        display: none !important;
+    }
+    
+    body::before {
+        animation: none;
+        opacity: 0.1;
+    }
+    
+    /* Typography adjustments */
+    .rpg-title {
+        font-size: 2.5rem;
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .rpg-subtitle {
+        font-size: 1.2rem;
+        padding: 0 1rem;
+    }
+    
+    /* Layout adjustments */
+    .rpg-stats-display {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .character-classes {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    .character-card {
+        padding: 1.5rem;
+    }
+    
+    .selected-character-display {
+        padding: 2rem;
+        margin: 0 1rem;
+    }
+    
+    /* Button size adjustments for mobile */
+    .btn-select-character,
+    .btn-view-quest,
+    .btn-start-adventure,
+    .btn-accept-quest,
+    .btn-upgrade-skills,
+    .btn-reset-tree,
+    .btn-send-scroll,
+    .btn-clear-scroll {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+    
+    /* Stack data blocks vertically */
+    .quests-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .skill-tree-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .guild-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    /* Navigation adjustments */
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: var(--bg-color);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 2rem;
+        flex-direction: column;
+        gap: 1.5rem;
+        border-bottom: 2px solid rgba(0, 243, 255, 0.3);
+        box-shadow: var(--shadow-xl);
+        z-index: 9999;
+        max-height: calc(100vh - 80px);
+        overflow-y: auto;
+    }
+    
+    .nav-links.active {
+        display: flex !important;
+        animation: slideDown 0.3s ease-out;
+        pointer-events: auto;
+    }
+    
+    .nav-links a {
+        pointer-events: auto;
+        cursor: pointer;
+        padding: 1rem;
+        font-size: 1.1rem;
+        width: 100%;
+        text-align: center;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+        background: rgba(0, 243, 255, 0.1);
+        box-shadow: var(--glow-primary);
+    }
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .menu-toggle {
+        display: block;
+        background: var(--gradient-primary);
+        color: white;
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius);
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: var(--glow-primary);
+    }
+    
+    .menu-toggle:hover {
+        animation: neonPulse 0.5s ease-in-out;
+    }
+}
+
+/* RPG Dark Mode Support */
+[data-theme="dark"] .rpg-hero {
+    background: linear-gradient(135deg, #0a0a2a 0%, #1a1a4a 50%, #2a2a6a 100%);
+}
+
+[data-theme="dark"] .character-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .selected-character-display {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* RPG Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap');
+
+/* ========== RPG QUEST LOG STYLES ========== */
+
+.rpg-quests {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #1a1a4a 0%, #2a2a6a 50%, #3a3a8a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.rpg-quests::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></svg>'),
+        radial-gradient(circle at 30% 30%, rgba(114, 9, 183, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(67, 97, 238, 0.2) 0%, transparent 50%);
+    z-index: 0;
+}
+
+.rpg-quests .container {
+    position: relative;
+    z-index: 1;
+}
+
+.rpg-section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.rpg-section-title {
+    font-size: 3.5rem;
+    color: white;
+    margin-bottom: 1rem;
+    font-family: 'Cinzel', serif;
+    text-shadow: 0 0 20px rgba(114, 9, 183, 0.5);
+    position: relative;
+    display: inline-block;
+}
+
+.rpg-section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #f72585, #4cc9f0);
+    border-radius: 2px;
+}
+
+.rpg-section-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Quests Grid */
+.quests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+.quest-card {
+    background: rgba(21, 21, 32, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    border: 2px solid rgba(0, 243, 255, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+.quest-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.quest-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-color);
+    box-shadow: var(--glow-primary),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.quest-card:hover::before {
+    transform: translateX(100%);
+}
+
+.quest-card[data-quest="merchant-guild"] {
+    border-color: rgba(247, 37, 133, 0.4);
+}
+
+.quest-card[data-quest="transport-network"] {
+    border-color: rgba(67, 97, 238, 0.4);
+}
+
+.quest-card[data-quest="probability-challenge"] {
+    border-color: rgba(76, 201, 240, 0.4);
+}
+
+.quest-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.quest-icon {
+    font-size: 3rem;
+    filter: drop-shadow(0 0 10px currentColor);
+    background: rgba(255, 255, 255, 0.1);
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.quest-title-section {
+    flex: 1;
+}
+
+.quest-title {
+    font-size: 1.75rem;
+    color: white;
+    margin-bottom: 0.75rem;
+    font-family: 'Cinzel', serif;
+}
+
+.quest-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.quest-difficulty {
+    color: #ffd700;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.quest-duration {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+}
+
+.quest-status {
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+}
+
+.quest-status.completed {
+    background: rgba(76, 201, 240, 0.2);
+    color: #4cc9f0;
+    border: 1px solid rgba(76, 201, 240, 0.3);
+}
+
+.quest-description {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+    border-left: 3px solid rgba(114, 9, 183, 0.5);
+    padding-left: 1rem;
+}
+
+.quest-objectives h4,
+.quest-loot h4,
+.quest-skills h4 {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    font-family: 'Cinzel', serif;
+}
+
+.objectives-list {
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+
+.objective {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.objective:last-child {
+    border-bottom: none;
+}
+
+.objective.completed {
+    color: #4cc9f0;
+}
+
+.loot-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.loot-item {
+    background: rgba(247, 37, 133, 0.2);
+    color: #f72585;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(247, 37, 133, 0.3);
+}
+
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.skill-tag {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: 2px solid;
+}
+
+.skill-tag.fire {
+    background: rgba(247, 37, 133, 0.2);
+    color: #f72585;
+    border-color: rgba(247, 37, 133, 0.3);
+}
+
+.skill-tag.combat {
+    background: rgba(67, 97, 238, 0.2);
+    color: #4361ee;
+    border-color: rgba(67, 97, 238, 0.3);
+}
+
+.skill-tag.magic {
+    background: rgba(114, 9, 183, 0.2);
+    color: #7209b7;
+    border-color: rgba(114, 9, 183, 0.3);
+}
+
+.skill-tag.crafting {
+    background: rgba(76, 201, 240, 0.2);
+    color: #4cc9f0;
+    border-color: rgba(76, 201, 240, 0.3);
+}
+
+.skill-tag.arcane {
+    background: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+/* Quest Buttons */
+.btn-view-quest {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #7209b7, #4361ee);
+    border: none;
+    border-radius: var(--radius);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-view-quest::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #4361ee, #7209b7);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-view-quest:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(114, 9, 183, 0.4);
+}
+
+.btn-view-quest:hover::before {
+    opacity: 1;
+}
+
+/* Quest Log Footer */
+.quest-log-footer {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+.quest-log-stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.quest-log-stats .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quest-log-stats strong {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.btn-accept-quest {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.25rem 3rem;
+    background: linear-gradient(135deg, #f72585, #4cc9f0);
+    border: none;
+    border-radius: var(--radius);
+    color: white;
+    font-weight: 800;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-accept-quest::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #4cc9f0, #f72585);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-accept-quest:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 20px 40px rgba(247, 37, 133, 0.4),
+        0 0 30px rgba(76, 201, 240, 0.4);
+}
+
+.btn-accept-quest:hover::before {
+    opacity: 1;
+}
+
+/* RPG Quest Responsive Design */
+@media (max-width: 768px) {
+    .rpg-section-title {
+        font-size: 2.5rem;
+    }
+    
+    .quests-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    .quest-card {
+        padding: 1.5rem;
+    }
+    
+    .quest-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .quest-log-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .btn-accept-quest {
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+}
+
+/* RPG Dark Mode Support for Quests */
+[data-theme="dark"] .rpg-quests {
+    background: linear-gradient(135deg, #1a1a4a 0%, #2a2a6a 50%, #3a3a8a 100%);
+}
+
+[data-theme="dark"] .quest-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .quest-log-footer {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* ========== RPG SKILL TREE STYLES ========== */
+
+.rpg-skill-tree {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #2a2a6a 0%, #3a3a8a 50%, #4a4aaa 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.rpg-skill-tree::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><path d="M100,20 L180,100 L100,180 L20,100 Z" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>'),
+        radial-gradient(circle at 20% 80%, rgba(76, 201, 240, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(247, 37, 133, 0.2) 0%, transparent 50%);
+    z-index: 0;
+}
+
+.rpg-skill-tree .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Skill Tree Container */
+.skill-tree-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin: 4rem 0;
+}
+
+/* Skill Branch */
+.skill-branch {
+    background: rgba(21, 21, 32, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    border: 2px solid rgba(0, 243, 255, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+}
+
+.skill-branch::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.skill-branch:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary-color);
+    box-shadow: var(--glow-primary),
+        inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.skill-branch:hover::before {
+    transform: translateX(100%);
+}
+
+.skill-branch[data-branch="frontend"] {
+    border-color: rgba(247, 37, 133, 0.4);
+}
+
+.skill-branch[data-branch="backend"] {
+    border-color: rgba(67, 97, 238, 0.4);
+}
+
+.skill-branch[data-branch="devops"] {
+    border-color: rgba(76, 201, 240, 0.4);
+}
+
+/* Branch Header */
+.branch-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.branch-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+.branch-title {
+    font-size: 1.75rem;
+    color: white;
+    flex: 1;
+    font-family: 'Cinzel', serif;
+}
+
+.branch-level {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.level-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.level-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    background: linear-gradient(135deg, #f72585, #4cc9f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Skill Nodes */
+.skill-nodes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.skill-node {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.skill-node:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.skill-node.unlocked {
+    border-color: rgba(76, 201, 240, 0.3);
+}
+
+.skill-node.learning {
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.node-icon {
+    font-size: 1.75rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.node-info {
+    flex: 1;
+}
+
+.node-title {
+    font-size: 1.1rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.node-progress {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4361ee, #7209b7);
+    border-radius: 3px;
+    position: relative;
+    transition: width 1s ease-in-out;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+.progress-value {
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    width: 40px;
+    text-align: right;
+}
+
+.node-status {
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.skill-node.unlocked .node-status {
+    background: rgba(76, 201, 240, 0.2);
+    color: #4cc9f0;
+    border: 1px solid rgba(76, 201, 240, 0.3);
+}
+
+.skill-node.learning .node-status {
+    background: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+/* Skill Tree Stats */
+.skill-tree-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.25rem;
+}
+
+/* Skill Tree Actions */
+.skill-tree-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.btn-upgrade-skills,
+.btn-reset-tree {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-upgrade-skills {
+    background: linear-gradient(135deg, #f72585, #4cc9f0);
+    color: white;
+}
+
+.btn-upgrade-skills::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #4cc9f0, #f72585);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-upgrade-skills:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(247, 37, 133, 0.4);
+}
+
+.btn-upgrade-skills:hover::before {
+    opacity: 1;
+}
+
+.btn-reset-tree {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-reset-tree:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* RPG Skill Tree Responsive Design */
+@media (max-width: 768px) {
+    .skill-tree-container {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    .skill-branch {
+        padding: 1.5rem;
+    }
+    
+    .skill-tree-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .skill-tree-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .btn-upgrade-skills,
+    .btn-reset-tree {
+        width: 100%;
+    }
+}
+
+/* RPG Dark Mode Support for Skill Tree */
+[data-theme="dark"] .rpg-skill-tree {
+    background: linear-gradient(135deg, #2a2a6a 0%, #3a3a8a 50%, #4a4aaa 100%);
+}
+
+[data-theme="dark"] .skill-branch {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .stat-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* ========== RPG CONTACT GUILD STYLES ========== */
+
+.rpg-contact-guild {
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #3a3a8a 0%, #4a4aaa 50%, #5a5aca 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.rpg-contact-guild::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><path d="M20,20 L180,20 L180,180 L20,180 Z" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>'),
+        radial-gradient(circle at 10% 90%, rgba(247, 37, 133, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 90% 10%, rgba(76, 201, 240, 0.2) 0%, transparent 50%);
+    z-index: 0;
+}
+
+.rpg-contact-guild .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Guild Content Layout */
+.guild-content {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    margin: 4rem 0;
+}
+
+/* Guild Info */
+.guild-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.guild-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.guild-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.guild-icon {
+    font-size: 2.5rem;
+    color: #4cc9f0;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border: 2px solid rgba(76, 201, 240, 0.3);
+}
+
+.guild-details {
+    flex: 1;
+}
+
+.guild-title {
+    font-size: 1.75rem;
+    color: white;
+    margin-bottom: 1rem;
+    font-family: 'Cinzel', serif;
+}
+
+.guild-description {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.guild-quest-types h4 {
+    color: white;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.quest-types-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.quest-type {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+}
+
+.quest-type:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(5px);
+}
+
+.quest-type i {
+    color: #f72585;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Guild Contacts */
+.guild-contacts {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.contacts-title {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.contacts-title i {
+    color: #4cc9f0;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.rpg-contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.rpg-contact-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateX(5px);
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    color: #f72585;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border: 2px solid rgba(247, 37, 133, 0.3);
+}
+
+.contact-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.25rem;
+}
+
+.contact-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+}
+
+/* Guild Scroll */
+.guild-scroll {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+
+.scroll-header {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.scroll-dots {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.scroll-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.scroll-dot.red {
+    background: #ff5f57;
+}
+
+.scroll-dot.yellow {
+    background: #ffbd2e;
+}
+
+.scroll-dot.green {
+    background: #28ca42;
+}
+
+.scroll-title {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.scroll-title i {
+    color: #4cc9f0;
+}
+
+/* RPG Contact Form */
+.rpg-contact-form {
+    padding: 2rem;
+}
+
+.form-field {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-label i {
+    color: #f72585;
+    font-size: 1.1rem;
+}
+
+.rpg-contact-form input,
+.rpg-contact-form select,
+.rpg-contact-form textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.rpg-contact-form input:focus,
+.rpg-contact-form select:focus,
+.rpg-contact-form textarea:focus {
+    outline: none;
+    border-color: #4cc9f0;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.2);
+}
+
+.rpg-contact-form input::placeholder,
+.rpg-contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.rpg-contact-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px;
+    padding-right: 2.5rem;
+}
+
+.rpg-contact-form select option {
+    background: #2a2a6a;
+    color: white;
+}
+
+.field-hint {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.25rem;
+    font-style: italic;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.btn-send-scroll,
+.btn-clear-scroll {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-send-scroll {
+    flex: 1;
+    background: linear-gradient(135deg, #f72585, #4cc9f0);
+    color: white;
+}
+
+.btn-send-scroll::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #4cc9f0, #f72585);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-send-scroll:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(247, 37, 133, 0.4);
+}
+
+.btn-send-scroll:hover::before {
+    opacity: 1;
+}
+
+.btn-clear-scroll {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-clear-scroll:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-text {
+    flex: 1;
+    text-align: center;
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+/* Form Note */
+.form-note {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.note-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.note-text i {
+    color: #4cc9f0;
+    margin-top: 0.2rem;
+}
+
+/* RPG Contact Guild Responsive Design */
+@media (max-width: 1024px) {
+    .guild-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .rpg-contact-guild {
+        padding: 4rem 0;
+    }
+    
+    .guild-content {
+        padding: 0 1rem;
+    }
+    
+    .guild-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .guild-icon {
+        align-self: center;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .btn-send-scroll,
+    .btn-clear-scroll {
+        width: 100%;
+    }
+}
+
+/* RPG Dark Mode Support for Contact Guild */
+[data-theme="dark"] .rpg-contact-guild {
+    background: linear-gradient(135deg, #3a3a8a 0%, #4a4aaa 50%, #5a5aca 100%);
+}
+
+[data-theme="dark"] .guild-card,
+[data-theme="dark"] .guild-contacts,
+[data-theme="dark"] .guild-scroll {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .rpg-contact-link {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* ========== RPG FOOTER STYLES ========== */
+
+.rpg-footer {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #1a1a4a 0%, #2a2a6a 50%, #3a3a8a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.rpg-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><path d="M100,20 Q180,100 100,180 Q20,100 100,20" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"/></svg>'),
+        radial-gradient(circle at 50% 0%, rgba(247, 37, 133, 0.1) 0%, transparent 50%);
+    z-index: 0;
+}
+
+.rpg-footer .container {
+    position: relative;
+    z-index: 1;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2.5rem;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.logo-icon {
+    font-size: 2.5rem;
+    color: #4cc9f0;
+    filter: drop-shadow(0 0 10px rgba(76, 201, 240, 0.5));
+}
+
+.logo-text {
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 1px;
+}
+
+.footer-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin: 1rem 0;
+}
+
+.footer-stat {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.footer-stat:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon {
+    font-size: 1.75rem;
+    color: #f72585;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stat-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 0.25rem;
+    white-space: nowrap;
+}
+
+.footer-message {
+    max-width: 600px;
+    margin: 1rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.message-text {
+    font-size: 1.25rem;
+    color: white;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    quotes: "“" "”" "‘" "’";
+}
+
+.message-text::before {
+    content: open-quote;
+    color: #4cc9f0;
+    font-size: 2rem;
+    line-height: 0;
+    vertical-align: -0.4em;
+    margin-right: 0.25rem;
+}
+
+.message-text::after {
+    content: close-quote;
+    color: #4cc9f0;
+    font-size: 2rem;
+    line-height: 0;
+    vertical-align: -0.4em;
+    margin-left: 0.25rem;
+}
+
+.message-author {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.footer-copyright {
+    margin-top: 1rem;
+}
+
+.footer-copyright p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0.5rem 0;
+}
+
+.footer-note {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* RPG Footer Responsive Design */
+@media (max-width: 768px) {
+    .rpg-footer {
+        padding: 3rem 0;
+    }
+    
+    .footer-stats {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .footer-stat {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .logo-text {
+        font-size: 1.75rem;
+    }
+    
+    .message-text {
+        font-size: 1.1rem;
+    }
+}
+
+/* RPG Dark Mode Support for Footer */
+[data-theme="dark"] .rpg-footer {
+    background: linear-gradient(135deg, #1a1a4a 0%, #2a2a6a 50%, #3a3a8a 100%);
+}
+
+[data-theme="dark"] .footer-stat {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* ========== PERSONAL BIO ENHANCEMENTS ========== */
+.personal-bio {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(10, 10, 15, 0.6);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.personal-bio::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    z-index: 1;
+}
+
+.personal-bio h4 {
+    color: var(--primary-color);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.personal-bio h4::before {
+    content: '👤';
+    font-size: 1.2rem;
+}
+
+.personal-bio p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.bio-list {
+    list-style: none;
+    margin: 1.5rem 0;
+    padding: 0;
+}
+
+.bio-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background: rgba(0, 243, 255, 0.05);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--primary-color);
+    transition: var(--transition);
+}
+
+.bio-item:hover {
+    background: rgba(0, 243, 255, 0.1);
+    transform: translateX(5px);
+    border-left-color: var(--accent-color);
+}
+
+.bio-item i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.bio-item span {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.bio-item strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Game Overlay Canvas Styles */
+#gameOverlay {
+    pointer-events: auto !important;
+}
+
+#gameScore {
+    animation: pulse-glow 2s infinite alternate;
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(0, 243, 255, 0.6), 0 0 30px rgba(0, 243, 255, 0.3);
+    }
+}
+
+/* Mobile optimizations for game */
+@media (max-width: 768px) {
+    #gameScore {
+        top: 10px;
+        right: 10px;
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+    
+    .personal-bio {
+        padding: 1rem;
+        margin: 1.5rem 0;
+    }
+    
+    .bio-item {
+        padding: 0.6rem;
+        gap: 0.8rem;
+    }
+}
+
+[data-theme="dark"] .footer-message {
+    background: rgba(255, 255, 255, 0.03);
+}
+/* ========== GAME OVERLAY STYLES ========== */
+
+/* Transparent game overlay container */
+.game-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9998;
+    overflow: hidden;
+}
+
+/* Game canvas - transparent background */
+#game-canvas {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    pointer-events: auto;
+    touch-action: none;
+}
+
+/* Score display */
+.game-score {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    border-radius: 12px;
+    padding: 12px 18px;
+    z-index: 9999;
+    pointer-events: none;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.score-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+}
+
+.score-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #00f3ff;
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);
+}
+
+/* Game instructions */
+.game-instructions {
+    position: fixed;
+    top: 160px;
+    right: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(10, 10, 15, 0.7);
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    z-index: 9999;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.game-instructions i {
+    color: #00f3ff;
+    font-size: 14px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Click feedback animation */
+.click-feedback {
+    position: fixed;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #ff00ff;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
+    pointer-events: none;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transform: translate(-50%, -50%);
+}
+
+.click-feedback i {
+    font-size: 14px;
+}
+
+/* Game particles */
+.game-particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: #00f3ff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 0 8px rgba(0, 243, 255, 0.8);
+    transform: translate(-50%, -50%);
+}
+
+/* Mobile adjustments for game */
+@media (max-width: 768px) {
+    .game-score {
+        top: 90px;
+        right: 10px;
+        padding: 8px 12px;
+        border-radius: 8px;
+    }
+    
+    .score-label {
+        font-size: 8px;
+    }
+    
+    .score-value {
+        font-size: 22px;
+    }
+    
+    .game-instructions {
+        top: 140px;
+        right: 10px;
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+    
+    .game-instructions i {
+        font-size: 12px;
+    }
+    
+    /* Ensure canvas doesn't interfere with scrolling */
+    #game-canvas {
+        touch-action: pan-y;
+    }
+}
+
+/* Hide game overlay on print */
+@media print {
+    .game-overlay,
+    .game-score,
+    .game-instructions {
+        display: none !important;
+    }
+}
+
+/* ========== RESET SCORE BUTTON ========== */
+.reset-score-btn {
+    background: transparent;
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.reset-score-btn i {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+}
+
+.reset-score-btn:hover {
+    border-color: rgba(255, 0, 255, 0.6);
+    background: rgba(255, 0, 255, 0.1);
+    transform: rotate(180deg);
+}
+
+.reset-score-btn:hover i {
+    color: #ff00ff;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .reset-score-btn {
+        width: 20px;
+        height: 20px;
+        margin-top: 6px;
+    }
+    
+    .reset-score-btn i {
+        font-size: 10px;
+    }
+}

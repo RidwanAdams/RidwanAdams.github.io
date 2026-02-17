@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ridwan - Portfolio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <!-- Game Overlay Canvas -->
+    <div id="game-overlay" class="game-overlay">
+        <canvas id="game-canvas"></canvas>
+        <div class="game-score">
+            <span class="score-label">SCORE</span>
+            <span id="score-value" class="score-value">0</span>
+            <button id="reset-score-btn" class="reset-score-btn" title="Reset Score">
+                <i class="fas fa-redo"></i>
+            </button>
+        </div>
+        <div class="game-instructions">
+            <i class="fas fa-plane"></i> Click the plane!
+        </div>
+    </div>
+    
+    <nav class="navbar">
+        <div class="container">
+            <a href="#hero" class="logo"><i class="fas fa-code"></i> Ridwan.dev</a>
+            <div class="nav-links">
+                <a href="#hero">Home</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="rpg-hero">
+        <div class="container">
+            <div class="rpg-title-section">
+                <div class="rpg-badge">
+                    <span class="rpg-badge-text"><i class="fas fa-code"></i> FULL-STACK DEVELOPER</span>
+                </div>
+                <h1 class="rpg-title">Hi, I'm <span class="rpg-highlight">Ridwan</span></h1>
+                <p class="rpg-subtitle">I build modern, scalable web applications that solve real-world problems. Passionate about creating exceptional digital experiences with clean code and innovative solutions.</p>
+                
+                <!-- Stats Display -->
+                <div class="rpg-stats-display">
+                    <div class="rpg-stat">
+                        <span class="rpg-stat-icon"><i class="fas fa-laptop-code"></i></span>
+                        <div class="rpg-stat-info">
+                            <span class="rpg-stat-value">5+</span>
+                            <span class="rpg-stat-label">Years Experience</span>
+                        </div>
+                    </div>
+                    <div class="rpg-stat">
+                        <span class="rpg-stat-icon"><i class="fas fa-project-diagram"></i></span>
+                        <div class="rpg-stat-info">
+                            <span class="rpg-stat-value">20+</span>
+                            <span class="rpg-stat-label">Projects Completed</span>
+                        </div>
+                    </div>
+                    <div class="rpg-stat">
+                        <span class="rpg-stat-icon"><i class="fas fa-users"></i></span>
+                        <div class="rpg-stat-info">
+                            <span class="rpg-stat-value">15+</span>
+                            <span class="rpg-stat-label">Happy Clients</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specializations -->
+            <div class="character-classes">
+                <!-- Full-Stack Development -->
+                <div class="character-card" data-class="paladin">
+                    <div class="character-header">
+                        <span class="character-icon"><i class="fas fa-layer-group"></i></span>
+                        <h3 class="character-name">Full-Stack Development</h3>
+                        <span class="character-level">Expert</span>
+                    </div>
+                    <div class="character-stats">
+                        <div class="stat-bar">
+                            <span class="stat-label">HTML/CSS</span>
+                            <div class="stat-progress">
+                                <div class="stat-fill" style="width: 95%"></div>
+                            </div>
+                            <span class="stat-value">95%</span>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">JavaScript</span>
+                            <div class="stat-progress">
+                                <div class="stat-fill" style="width: 90%"></div>
+                            </div>
+                            <span class="stat-value">90%</span>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">React/Node</span>
+                            <div class="stat-progress">
+                                <div class="stat-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="stat-value">85%</span>
+                        </div>
+                    </div>
+                    <p class="character-description">End-to-end development expertise. From responsive frontends to scalable backends, I deliver complete solutions that drive business growth.</p>
+                    <button class="btn-select-character" data-class="paladin">
+                        <span class="btn-text">View Skills</span>
+                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                    </button>
+                </div>
+
+                <!-- Frontend Development -->
+                <div class="character-card" data-class="ranger">
+                    <div class="character-header">
+                        <span class="character-icon"><i class="fas fa-palette"></i></span>
+                        <h3 class="character-name">Frontend Development</h3>
+                        <span class="character-level">Expert</span>
+                    </div>
+                    <div class="character-stats">
+                        <div class="stat-bar">
+                            <span class="stat-label">CSS/Animations</span>
+                            <div class="stat-progress">
+                                <div class="stat-fill" style="width: 95%"></div>
+                            </div>
+                            <span class="stat-value">95%</span>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">React/Vue</span>
+                            <div class="stat-progress">
+                                <div class="stat-fill" style="width: 90%"></div>
+                            </div>
+                            <span class="stat-value">90%</span>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">UI/UX Design</span>
+                            <div class="stat-progress">
+                                <div class="stat-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="stat-value">85%</span>
+                        </div>
+                    </div>
+                    <p class="character-description">Creating stunning, responsive interfaces with pixel-perfect precision. Specializing in modern frameworks and engaging user experiences.</p>
+                    <button class="btn-select-character" data-class="ranger">
+                        <span class="btn-text">View Skills</span>
+                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                    </button>
+                </div>
+
+                <!-- Backend Development -->
+                <div class="character-card" data-class="wizard">
+                    <div class="character-header">
+                        <span class="character-icon"><i class="fas fa-server"></i></span>
+                        <h3 class="character-name">Backend Development</h3>
+                        <span class="character-level">Expert</span>
+                    </div>
+                    <div class="character-stats">
+                        <div class="stat-bar">
+                            <span class="stat-label">Node.js/Python</span>
+                            <div class="stat-progress">
+                                <div class="stat-fill" style="width: 90%"></div>
+                            </div>
+                            <span class="stat-value">90%</span>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">Database Design</span>
+                            <div class="stat-progress">
+                                <div class="stat-fill" style="width: 88%"></div>
+                            </div>
+                            <span class="stat-value">88%</span>
+                        </div>
+                        <div class="stat-bar">
+                            <span class="stat-label">API Development</span>
+                            <div class="stat-progress">
+                                <div class="stat-fill" style="width: 92%"></div>
+                            </div>
+                            <span class="stat-value">92%</span>
+                        </div>
+                    </div>
+                    <p class="character-description">Building robust server-side solutions and scalable architectures. Expert in database design, RESTful APIs, and cloud infrastructure.</p>
+                    <button class="btn-select-character" data-class="wizard">
+                        <span class="btn-text">View Skills</span>
+                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="game-start-section" id="gameStartSection" style="display: none;">
+                <div class="selected-character-display">
+                    <h3>Ready to Work Together?</h3>
+                    <p>Specialization selected: <span id="selectedClassName" class="selected-class-name">Full-Stack Development</span></p>
+                    <button class="btn-start-adventure" id="startAdventure">
+                        <span class="btn-text">View My Projects</span>
+                        <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="rpg-quests">
+        <div class="container">
+            <div class="rpg-section-header">
+                <h2 class="rpg-section-title"><i class="fas fa-briefcase"></i> Featured Projects</h2>
+                <p class="rpg-section-subtitle">A showcase of my recent work and technical achievements</p>
+            </div>
+            
+            <div class="quests-grid">
+                <!-- Quest 1: Samah Clothing -->
+                <div class="quest-card" data-quest="merchant-guild">
+                    <div class="quest-header">
+                         <div class="quest-icon"><i class="fas fa-shopping-bag"></i></div>
+                        <div class="quest-title-section">
+                            <h3 class="quest-title">Samah Clothing E-Commerce</h3>
+                             <div class="quest-meta">
+                                <span class="quest-difficulty">E-Commerce</span>
+                                <span class="quest-duration">3 Months</span>
+                                <span class="quest-status completed"><i class="fas fa-check"></i> Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quest-description">
+                        <p>A full-featured e-commerce platform for a fashion retailer. Built with real-time inventory management, secure payment processing, and an intuitive admin dashboard for seamless business operations.</p>
+                    </div>
+                    
+                    <div class="quest-objectives">
+                        <h4>Key Features:</h4>
+                        <ul class="objectives-list">
+                            <li class="objective completed"><i class="fas fa-check"></i> Real-time inventory tracking system</li>
+                            <li class="objective completed"><i class="fas fa-check"></i> Secure Stripe payment integration</li>
+                            <li class="objective completed"><i class="fas fa-check"></i> Responsive mobile-first design</li>
+                            <li class="objective completed"><i class="fas fa-check"></i> Comprehensive admin dashboard</li>
+                        </ul>
+                    </div>
+                    
+                     <div class="quest-loot">
+                        <h4><i class="fas fa-chart-line"></i> Results:</h4>
+                        <div class="loot-items">
+                            <span class="loot-item">40% Sales Increase</span>
+                            <span class="loot-item">500+ Active Users</span>
+                            <span class="loot-item">99.9% Uptime</span>
+                            <span class="loot-item">4.8/5 User Rating</span>
+                        </div>
+                    </div>
+                    
+                     <div class="quest-skills">
+                        <h4><i class="fas fa-code"></i> Technologies:</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag fire">React</span>
+                            <span class="skill-tag combat">Firebase</span>
+                            <span class="skill-tag magic">Node.js</span>
+                            <span class="skill-tag crafting">Stripe API</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-view-quest" data-quest="merchant-guild">
+                        <span class="btn-text">View Case Study</span>
+                        <span class="btn-icon"><i class="fas fa-external-link-alt"></i></span>
+                    </button>
+                </div>
+                
+                <!-- Project 2: Trotro Mate -->
+                <div class="quest-card" data-quest="transport-network">
+                    <div class="quest-header">
+                        <div class="quest-icon"><i class="fas fa-map-marked-alt"></i></div>
+                        <div class="quest-title-section">
+                            <h3 class="quest-title">Trotro Mate Transport App</h3>
+                            <div class="quest-meta">
+                                <span class="quest-difficulty">Mobile App</span>
+                                <span class="quest-duration">4 Months</span>
+                                <span class="quest-status completed"><i class="fas fa-check"></i> Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quest-description">
+                        <p>A real-time public transportation tracking application for Ghana. Features live vehicle tracking, route optimization, and an intuitive interface helping thousands of commuters navigate efficiently.</p>
+                    </div>
+                    
+                    <div class="quest-objectives">
+                        <h4>Key Features:</h4>
+                        <ul class="objectives-list">
+                            <li class="objective completed"><i class="fas fa-check"></i> Real-time GPS vehicle tracking</li>
+                            <li class="objective completed"><i class="fas fa-check"></i> Interactive map with route optimization</li>
+                            <li class="objective completed"><i class="fas fa-check"></i> Offline functionality support</li>
+                            <li class="objective completed"><i class="fas fa-check"></i> Multi-language support</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="quest-loot">
+                        <h4><i class="fas fa-chart-line"></i> Results:</h4>
+                        <div class="loot-items">
+                            <span class="loot-item">10,000+ Monthly Users</span>
+                            <span class="loot-item">60% Faster Routes</span>
+                            <span class="loot-item">4.6 App Store Rating</span>
+                            <span class="loot-item">Featured on Tech Blogs</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quest-skills">
+                        <h4><i class="fas fa-code"></i> Technologies:</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag combat">React Native</span>
+                            <span class="skill-tag magic">Leaflet.js</span>
+                            <span class="skill-tag crafting">Node.js</span>
+                            <span class="skill-tag fire">MongoDB</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-view-quest" data-quest="transport-network">
+                        <span class="btn-text">View Case Study</span>
+                        <span class="btn-icon"><i class="fas fa-external-link-alt"></i></span>
+                    </button>
+                </div>
+                
+                <!-- Project 3: Predictive Analytics Dashboard -->
+                <div class="quest-card" data-quest="probability-challenge">
+                    <div class="quest-header">
+                        <div class="quest-icon"><i class="fas fa-brain"></i></div>
+                        <div class="quest-title-section">
+                            <h3 class="quest-title">ML Predictive Analytics</h3>
+                            <div class="quest-meta">
+                                <span class="quest-difficulty">Data Science</span>
+                                <span class="quest-duration">2 Months</span>
+                                <span class="quest-status completed"><i class="fas fa-check"></i> Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quest-description">
+                        <p>An advanced machine learning platform for sports analytics. Utilizes statistical modeling and predictive algorithms to deliver real-time insights with high accuracy for data-driven decision making.</p>
+                    </div>
+                    
+                    <div class="quest-objectives">
+                        <h4>Key Features:</h4>
+                        <ul class="objectives-list">
+                            <li class="objective completed"><i class="fas fa-check"></i> Advanced statistical modeling</li>
+                            <li class="objective completed"><i class="fas fa-check"></i> Real-time data processing pipeline</li>
+                            <li class="objective completed"><i class="fas fa-check"></i> Interactive analytics dashboard</li>
+                            <li class="objective completed"><i class="fas fa-check"></i> RESTful API integration</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="quest-loot">
+                        <h4><i class="fas fa-chart-line"></i> Results:</h4>
+                        <div class="loot-items">
+                            <span class="loot-item">87% Prediction Accuracy</span>
+                            <span class="loot-item">50K+ Daily Calculations</span>
+                            <span class="loot-item">Sub-second Response Time</span>
+                            <span class="loot-item">Enterprise Client</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quest-skills">
+                        <h4><i class="fas fa-code"></i> Technologies:</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag magic">Python</span>
+                            <span class="skill-tag arcane">TensorFlow</span>
+                            <span class="skill-tag crafting">Pandas</span>
+                            <span class="skill-tag fire">AWS</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-view-quest" data-quest="probability-challenge">
+                        <span class="btn-text">View Case Study</span>
+                        <span class="btn-icon"><i class="fas fa-external-link-alt"></i></span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="quest-log-footer">
+                <p class="quest-log-stats">
+                    <span class="stat"><i class="fas fa-folder-open"></i> Total Projects: <strong>3</strong></span>
+                    <span class="stat"><i class="fas fa-clock"></i> Combined Experience: <strong>9 Months</strong></span>
+                    <span class="stat"><i class="fas fa-users"></i> Client Satisfaction: <strong>100%</strong></span>
+                    <span class="stat"><i class="fas fa-rocket"></i> All Delivered On Time</span>
+                </p>
+                <button class="btn-accept-quest" id="acceptNewQuest">
+                    <span class="btn-text">Start Your Project</span>
+                    <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="rpg-skill-tree">
+        <div class="container">
+            <div class="rpg-section-header">
+                <h2 class="rpg-section-title"><i class="fas fa-layer-group"></i> Technical Skills</h2>
+                <p class="rpg-section-subtitle">My toolkit of technologies and expertise for building modern applications</p>
+            </div>
+            
+            <div class="skill-tree-container">
+                <!-- Frontend Combat Branch -->
+                <div class="skill-branch" data-branch="frontend">
+                    <div class="branch-header">
+                        <div class="branch-icon"><i class="fas fa-swords"></i></div>
+                        <h3 class="branch-title">Frontend Combat</h3>
+                        <div class="branch-level">
+                            <span class="level-label">Mastery:</span>
+                            <span class="level-value">85%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-nodes">
+                        <div class="skill-node unlocked" data-skill="html-css">
+                            <div class="node-icon"><i class="fas fa-palette"></i></div>
+                            <div class="node-info">
+                                <h4 class="node-title">HTML/CSS Artistry</h4>
+                                <div class="node-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 95%"></div>
+                                    </div>
+                                    <span class="progress-value">95%</span>
+                                </div>
+                            </div>
+                            <div class="node-status"><i class="fas fa-check"></i> Mastered</div>
+                        </div>
+                        
+                        <div class="skill-node unlocked" data-skill="javascript">
+                            <div class="node-icon"><i class="fas fa-bolt"></i></div>
+                            <div class="node-info">
+                                <h4 class="node-title">JavaScript Sorcery</h4>
+                                <div class="node-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 90%"></div>
+                                    </div>
+                                    <span class="progress-value">90%</span>
+                                </div>
+                            </div>
+                            <div class="node-status"><i class="fas fa-check"></i> Mastered</div>
+                        </div>
+                        
+                        <div class="skill-node unlocked" data-skill="react">
+                            <div class="node-icon"><i class="fas fa-atom"></i></div>
+                            <div class="node-info">
+                                <h4 class="node-title">React Framework</h4>
+                                <div class="node-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span class="progress-value">85%</span>
+                                </div>
+                            </div>
+                            <div class="node-status"><i class="fas fa-check"></i> Mastered</div>
+                        </div>
+                        
+                        <div class="skill-node learning" data-skill="animations">
+                            <div class="node-icon"><i class="fas fa-magic"></i></div>
+                            <div class="node-info">
+                                <h4 class="node-title">Advanced Animations</h4>
+                                <div class="node-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 70%"></div>
+                                    </div>
+                                    <span class="progress-value">70%</span>
+                                </div>
+                            </div>
+                            <div class="node-status"><i class="fas fa-book"></i> Learning</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Backend Magic Branch -->
+                <div class="skill-branch" data-branch="backend">
+                    <div class="branch-header">
+                        <div class="branch-icon"><i class="fas fa-crystal-ball"></i></div>
+                        <h3 class="branch-title">Backend Magic</h3>
+                        <div class="branch-level">
+                            <span class="level-label">Mastery:</span>
+                            <span class="level-value">80%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-nodes">
+                        <div class="skill-node unlocked" data-skill="nodejs">
+                            <div class="node-icon"><i class="fas fa-circle"></i></div>
+                            <div class="node-info">
+                                <h4 class="node-title">Node.js Wizardry</h4>
+                                <div class="node-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 88%"></div>
+                                    </div>
+                                    <span class="progress-value">88%</span>
+                                </div>
+                            </div>
+                            <div class="node-status"><i class="fas fa-check"></i> Mastered</div>
+                        </div>
+                        
+                        <div class="skill-node unlocked" data-skill="firebase">
+                            <div class="node-icon"><i class="fas fa-fire"></i></div>
+                            <div class="node-info">
+                                <h4 class="node-title">Firebase Alchemy</h4>
+                                <div class="node-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span class="progress-value">85%</span>
+                                </div>
+                            </div>
+                            <div class="node-status"><i class="fas fa-check"></i> Mastered</div>
+                        </div>
+                        
+                        <div class="skill-node unlocked" data-skill="api">
+                            <div class="node-icon"><i class="fas fa-link"></i></div>
+                            <div class="node-info">
+                                <h4 class="node-title">API Conjuring</h4>
+                                <div class="node-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 90%"></div>
+                                    </div>
+                                    <span class="progress-value">90%</span>
+                                </div>
+                            </div>
+                            <div class="node-status"><i class="fas fa-check"></i> Mastered</div>
+                        </div>
+                        
+                        <div class="skill-node learning" data-skill="python">
+                            <div class="node-icon"><i class="fas fa-code"></i></div>
+                            <div class="node-info">
+                                <h4 class="node-title">Python Arcana</h4>
+                                <div class="node-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%"></div>
+                                    </div>
+                                    <span class="progress-value">75%</span>
+                                </div>
+                            </div>
+                            <div class="node-status"><i class="fas fa-book"></i> Learning</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- DevOps Crafting Branch -->
+                <div class="skill-branch" data-branch="devops">
+                    <div class="branch-header">
+                        <div class="branch-icon"><i class="fas fa-cog"></i></div>
+                        <h3 class="branch-title">DevOps Crafting</h3>
+                        <div class="branch-level">
+                            <span class="level-label">Mastery:</span>
+                            <span class="level-value">75%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-nodes">
+                        <div class="skill-node unlocked" data-skill="git">
+                            <div class="node-icon"><i class="fas fa-book"></i></div>
+                            <div class="node-info">
+                                <h4 class="node-title">Git & GitHub Lore</h4>
+                                <div class="node-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 90%"></div>
+                                    </div>
+                                    <span class="progress-value">90%</span>
+                                </div>
+                            </div>
+                            <div class="node-status"><i class="fas fa-check"></i> Mastered</div>
+                        </div>
+                        
+                        <div class="skill-node unlocked" data-skill="vscode">
+                            <div class="node-icon"><i class="fas fa-laptop-code"></i></div>
+                            <div class="node-info">
+                                <h4 class="node-title">VS Code Forge</h4>
+                                <div class="node-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span class="progress-value">85%</span>
+                                </div>
+                            </div>
+                            <div class="node-status"><i class="fas fa-check"></i> Mastered</div>
+                        </div>
+                        
+                        <div class="skill-node unlocked" data-skill="playwright">
+                            <div class="node-icon"><i class="fas fa-theater-masks"></i></div>
+                            <div class="node-info">
+                                <h4 class="node-title">Playwright Automation</h4>
+                                <div class="node-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 80%"></div>
+                                    </div>
+                                    <span class="progress-value">80%</span>
+                                </div>
+                            </div>
+                            <div class="node-status"><i class="fas fa-check"></i> Mastered</div>
+                        </div>
+                        
+                        <div class="skill-node learning" data-skill="deployment">
+                            <div class="node-icon"><i class="fas fa-rocket"></i></div>
+                            <div class="node-info">
+                                <h4 class="node-title">Cloud Deployment</h4>
+                                <div class="node-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 65%"></div>
+                                    </div>
+                                    <span class="progress-value">65%</span>
+                                </div>
+                            </div>
+                            <div class="node-status"><i class="fas fa-book"></i> Learning</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-tree-stats">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-chart-bar"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value">12</span>
+                        <span class="stat-label">Skills Unlocked</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-star"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value">9</span>
+                        <span class="stat-label">Skills Mastered</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-book"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value">3</span>
+                        <span class="stat-label">In Progress</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value">80%</span>
+                        <span class="stat-label">Overall Mastery</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-tree-actions">
+                <button class="btn-upgrade-skills" id="upgradeSkills">
+                    <span class="btn-text">Upgrade Skills</span>
+                    <span class="btn-icon"><i class="fas fa-arrow-up"></i></span>
+                </button>
+                <button class="btn-reset-tree" id="resetTree">
+                    <span class="btn-text">Reset Skill Points</span>
+                    <span class="btn-icon"><i class="fas fa-redo"></i></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="rpg-contact-guild">
+        <div class="container">
+            <div class="rpg-section-header">
+                <h2 class="rpg-section-title"><i class="fas fa-envelope"></i> Get In Touch</h2>
+                <p class="rpg-section-subtitle">Have a project in mind? Let's discuss how I can help bring your ideas to life</p>
+            </div>
+            
+            <div class="guild-content">
+                <div class="guild-info">
+                    <div class="guild-card">
+                        <div class="guild-icon">
+                            <i class="fas fa-scroll"></i>
+                        </div>
+                        <div class="guild-details">
+                            <h3 class="guild-title">About Me</h3>
+                            <p class="guild-description">I'm Ridwan, a full-stack developer passionate about creating digital solutions that make a real impact. With experience across e-commerce, transportation, and data analytics, I bring both technical expertise and business understanding to every project.</p>
+                             
+                            <div class="personal-bio">
+                                <h4>My Expertise:</h4>
+                                <p>I specialize in building modern web applications that solve real-world problems. With over 5 years of experience, I've helped businesses across diverse industries achieve their digital goals:</p>
+                                <ul class="bio-list">
+                                    <li class="bio-item">
+                                        <i class="fas fa-shopping-bag"></i>
+                                        <span><strong>E-commerce Development</strong> - Complete online stores with payment integration, inventory management, and 40% average sales growth</span>
+                                    </li>
+                                    <li class="bio-item">
+                                        <i class="fas fa-mobile-alt"></i>
+                                        <span><strong>Mobile & Web Apps</strong> - Real-time tracking systems and responsive applications serving 10,000+ users</span>
+                                    </li>
+                                    <li class="bio-item">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span><strong>Data & Analytics</strong> - Machine learning models and dashboards with 87% prediction accuracy</span>
+                                    </li>
+                                    <li class="bio-item">
+                                        <i class="fas fa-rocket"></i>
+                                        <span><strong>DevOps & Automation</strong> - CI/CD pipelines and cloud infrastructure reducing deployment time by 60%</span>
+                                    </li>
+                                </ul>
+                                <p>I believe great software combines clean code with business value. Whether you need a complete platform, API integration, or performance optimization, I'm here to help turn your vision into reality.</p>
+                            </div>
+                             
+                            <div class="guild-quest-types">
+                                <h4>Services I Offer:</h4>
+                                <ul class="quest-types-list">
+                                    <li class="quest-type">
+                                        <i class="fas fa-laptop-code"></i>
+                                        <span>Frontend Development (React, Vue, Responsive Design)</span>
+                                    </li>
+                                    <li class="quest-type">
+                                        <i class="fas fa-server"></i>
+                                        <span>Backend Development (Node.js, Python, API Design)</span>
+                                    </li>
+                                    <li class="quest-type">
+                                        <i class="fas fa-cloud"></i>
+                                        <span>DevOps & Cloud (AWS, CI/CD, Automation)</span>
+                                    </li>
+                                    <li class="quest-type">
+                                        <i class="fas fa-layer-group"></i>
+                                        <span>Full-Stack Solutions (End-to-End Development)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="guild-contacts">
+                        <h3 class="contacts-title">
+                            <i class="fas fa-address-card"></i>
+                            Contact Information
+                        </h3>
+                        <div class="contact-methods">
+                            <a href="mailto:ridwan@example.com" class="rpg-contact-link">
+                                <span class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span class="contact-info">
+                                    <span class="contact-label">Email</span>
+                                    <span class="contact-value">ridwan@example.com</span>
+                                </span>
+                            </a>
+                            <a href="https://github.com/ridwan" class="rpg-contact-link" target="_blank">
+                                <span class="contact-icon">
+                                    <i class="fab fa-github"></i>
+                                </span>
+                                <span class="contact-info">
+                                    <span class="contact-label">GitHub</span>
+                                    <span class="contact-value">github.com/ridwan</span>
+                                </span>
+                            </a>
+                            <a href="#" class="rpg-contact-link">
+                                <span class="contact-icon">
+                                    <i class="fab fa-linkedin"></i>
+                                </span>
+                                <span class="contact-info">
+                                    <span class="contact-label">LinkedIn</span>
+                                    <span class="contact-value">LinkedIn Profile</span>
+                                </span>
+                            </a>
+                            <a href="#" class="rpg-contact-link">
+                                <span class="contact-icon">
+                                    <i class="fab fa-twitter"></i>
+                                </span>
+                                <span class="contact-info">
+                                    <span class="contact-label">Twitter</span>
+                                    <span class="contact-value">@ridwan_dev</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="guild-scroll">
+                    <div class="scroll-header">
+                        <div class="scroll-dots">
+                            <span class="scroll-dot red"></span>
+                            <span class="scroll-dot yellow"></span>
+                            <span class="scroll-dot green"></span>
+                        </div>
+                        <span class="scroll-title">
+                            <i class="fas fa-paper-plane"></i>
+                            Send a Message
+                        </span>
+                    </div>
+                    
+                    <form class="rpg-contact-form">
+                        <div class="form-field">
+                            <label for="adventurerName" class="form-label">
+                                <i class="fas fa-user"></i>
+                                Your Name
+                            </label>
+                            <input type="text" id="adventurerName" placeholder="John Doe" required>
+                            <div class="field-hint">How should I address you?</div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label for="scrollAddress" class="form-label">
+                                <i class="fas fa-envelope"></i>
+                                Email Address
+                            </label>
+                            <input type="email" id="scrollAddress" placeholder="john@example.com" required>
+                            <div class="field-hint">Where I should send my reply</div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label for="questType" class="form-label">
+                                <i class="fas fa-briefcase"></i>
+                                Project Type
+                            </label>
+                            <select id="questType" required>
+                                <option value="" disabled selected>Select a service</option>
+                                <option value="frontend">Frontend Development</option>
+                                <option value="backend">Backend Development</option>
+                                <option value="devops">DevOps & Cloud</option>
+                                <option value="fullstack">Full-Stack Solution</option>
+                                <option value="consultation">Technical Consultation</option>
+                            </select>
+                            <div class="field-hint">What type of project do you need?</div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label for="questDetails" class="form-label">
+                                <i class="fas fa-comment-alt"></i>
+                                Project Details
+                            </label>
+                            <textarea id="questDetails" placeholder="Tell me about your project, goals, timeline, and any specific requirements..." rows="5" required></textarea>
+                            <div class="field-hint">The more details, the better I can help</div>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label for="rewardOffer" class="form-label">
+                                <i class="fas fa-dollar-sign"></i>
+                                Budget Range
+                            </label>
+                            <select id="rewardOffer">
+                                <option value="" disabled selected>Select budget (optional)</option>
+                                <option value="small">$1,000 - $5,000</option>
+                                <option value="medium">$5,000 - $15,000</option>
+                                <option value="large">$15,000 - $50,000</option>
+                                <option value="enterprise">$50,000+</option>
+                                <option value="discuss">Let's discuss</option>
+                            </select>
+                            <div class="field-hint">Helps me understand the project scope</div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-send-scroll">
+                                <span class="btn-text">Send Message</span>
+                                <span class="btn-icon">
+                                    <i class="fas fa-paper-plane"></i>
+                                </span>
+                            </button>
+                            <button type="reset" class="btn-clear-scroll">
+                                <span class="btn-text">Clear Scroll</span>
+                                <span class="btn-icon">
+                                    <i class="fas fa-broom"></i>
+                                </span>
+                            </button>
+                        </div>
+                        
+                        <div class="form-note">
+                            <p class="note-text">
+                                <i class="fas fa-sticky-note"></i>
+                                <strong>Note:</strong> Ravens typically deliver within 24 hours. For urgent quests, consider sending multiple ravens.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RPG Footer -->
+    <footer class="rpg-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </span>
+                    <span class="logo-text">CodeRealm Portfolio</span>
+                </div>
+                
+                <div class="footer-stats">
+                    <div class="footer-stat">
+                        <span class="stat-icon">
+                            <i class="fas fa-sword"></i>
+                        </span>
+                        <div class="stat-info">
+                            <span class="stat-value">3</span>
+                            <span class="stat-label">Quests Completed</span>
+                        </div>
+                    </div>
+                    <div class="footer-stat">
+                        <span class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </span>
+                        <div class="stat-info">
+                            <span class="stat-value">100%</span>
+                            <span class="stat-label">Success Rate</span>
+                        </div>
+                    </div>
+                    <div class="footer-stat">
+                        <span class="stat-icon">
+                            <i class="fas fa-hourglass-half"></i>
+                        </span>
+                        <div class="stat-info">
+                            <span class="stat-value">9</span>
+                            <span class="stat-label">Months Adventure</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-message">
+                    <p class="message-text">"May your code compile on the first try, and your bugs be few and far between."</p>
+                    <p class="message-author">— Guild Master Ridwan</p>
+                </div>
+                
+                <div class="footer-copyright">
+                    <p>&copy; 2026 CodeRealm Adventures. All quests reserved.</p>
+                    <p class="footer-note">Built with magical HTML, enchanted CSS, and sorcerous JavaScript.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- Game Overlay Script -->
+    <script src="game-overlay.js"></script>
+</body>
+</html>
